@@ -1,21 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.lights-container');
-    const neonBox = document.querySelector('.neon-box');
-    const numLights = 30; // Количество шариков
+    const garlandWrap = document.querySelector('.garland-wrap');
+    const numLights = 50; // Увеличено количество шариков
 
-    if (!container || !neonBox) {
-        console.error('Не найдены элементы lights-container или neon-box.');
+    if (!container || !garlandWrap) {
+        console.error('Не найдены элементы lights-container или garland-wrap.');
         return;
     }
 
-    // Используем ResizeObserver для отслеживания изменения размера блока
     const resizeObserver = new ResizeObserver(entries => {
         const entry = entries[0];
         const boxWidth = entry.contentRect.width;
         const boxHeight = entry.contentRect.height;
         const totalPerimeter = (boxWidth * 2) + (boxHeight * 2);
 
-        // Очищаем предыдущие шарики, если они были
         container.innerHTML = '';
 
         for (let i = 0; i < numLights; i++) {
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const progress = i / numLights;
             let top, left;
 
-            // Расчет позиций по периметру
             if (progress < (boxWidth / totalPerimeter)) {
                 // Верхняя сторона
                 left = progress * totalPerimeter;
@@ -47,13 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
             light.style.left = `${left}px`;
             light.style.top = `${top}px`;
 
-            // Устанавливаем задержку для "бегущего огонька"
             light.style.animationDelay = `${i * (3 / numLights)}s`;
             
             container.appendChild(light);
         }
     });
 
-    // Наблюдаем за изменением размеров neon-box
-    resizeObserver.observe(neonBox);
+    resizeObserver.observe(garlandWrap);
 });
