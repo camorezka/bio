@@ -2,7 +2,8 @@
 body {
     background-color: #000;
     color: #fff;
-    font-family: 'Poppins', sans-serif;
+    /* Изменяем шрифт на Roboto */
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,29 +14,37 @@ body {
 
 /* Стили для главного неонового блока */
 .neon-box {
-    /* Уменьшаем ширину */
     width: 500px; 
     padding: 40px;
     border: 3px solid transparent;
     border-radius: 20px;
-    
-    /* Уменьшаем яркость и размах свечения */
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3);
-    
     background-color: rgba(10, 10, 10, 0.7);
-    animation: neon-glow 3s infinite alternate ease-in-out;
     box-sizing: border-box;
+
+    /* Добавляем две анимации: для свечения и для появления */
+    animation: neon-glow 3s infinite alternate ease-in-out, fade-in 1.5s ease-out forwards;
 }
 
 /* Анимация для неоновой подсветки */
 @keyframes neon-glow {
     0% {
-        /* Уменьшаем яркость */
         box-shadow: 0 0 15px #00FFFF, 0 0 25px #00FFFF, 0 0 35px #00FFFF;
     }
     100% {
-        /* Уменьшаем яркость */
         box-shadow: 0 0 15px #42a9ff, 0 0 25px #42a9ff, 0 0 35px #42a9ff;
+    }
+}
+
+/* Новая анимация появления */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
