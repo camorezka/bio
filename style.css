@@ -1,6 +1,6 @@
 /* Основные стили для страницы */
 body {
-    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+    background-color: #000;
     color: #fff;
     font-family: 'PT Sans', sans-serif;
     display: flex;
@@ -10,10 +10,38 @@ body {
     margin: 0;
     text-align: center;
     line-height: 1.5;
+    overflow: hidden; /* Скрываем прокрутку, если анимация выходит за края */
 }
+
+/* Анимация фона */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1.5px);
+    background-size: 150px 150px, 200px 200px;
+    background-position: 0 0, 75px 75px;
+    animation: background-move 120s linear infinite;
+}
+
+@keyframes background-move {
+    from {
+        background-position: 0 0, 75px 75px;
+    }
+    to {
+        background-position: 150px 150px, 275px 225px;
+    }
+}
+
 
 /* Стили для главного неонового блока */
 .neon-box {
+    position: relative; /* Чтобы гирлянда позиционировалась относительно блока */
     width: 380px; 
     padding: 25px;
     border: 1px solid transparent;
@@ -22,6 +50,7 @@ body {
     box-sizing: border-box;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     animation: neon-glow 3s infinite alternate ease-in-out, fade-in 1.5s ease-out forwards;
+    z-index: 1; /* Чтобы был выше фона */
 }
 
 .neon-box:hover {
@@ -91,18 +120,67 @@ body {
     border-bottom: 1px solid #00FFFF;
 }
 
-/* Адаптивность для мобильных устройств */
+
+/* Стили для гирлянды */
+.garland {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 10px;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+}
+
+.garland::before,
+.garland::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #00FFFF;
+    box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF;
+    animation: garland-pulse 2s infinite alternate ease-in-out;
+}
+
+.garland::before {
+    left: 0;
+    top: -5px;
+    animation-delay: 0.5s;
+}
+
+.garland::after {
+    right: 0;
+    top: -5px;
+    animation-delay: 1s;
+}
+
+@keyframes garland-pulse {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 5px #00FFFF;
+    }
+    100% {
+        transform: scale(1.2);
+        box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    }
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
     .neon-box {
         width: 90%;
         padding: 20px;
     }
-
     .content h1 {
         font-size: 1.8em;
     }
-
     .content p {
         font-size: 0.9em;
+    }
+    .garland {
+        width: 60%;
     }
 }
