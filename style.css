@@ -1,25 +1,26 @@
 /* Основные стили для страницы */
 body {
-    background-color: #000;
+    /* Добавляем легкий градиентный фон */
+    background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
     color: #fff;
-    /* Изменяем шрифт на Roboto */
-    font-family: 'Roboto', sans-serif;
+    /* Изменяем шрифт на PT Sans */
+    font-family: 'PT Sans', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
     text-align: center;
+    line-height: 1.6;
 }
 
 /* Стили для главного неонового блока */
 .neon-box {
-    width: 500px; 
-    padding: 40px;
-    border: 3px solid transparent;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3);
-    background-color: rgba(10, 10, 10, 0.7);
+    width: 420px; 
+    padding: 30px;
+    border: 1px solid transparent; /* Уменьшаем толщину границы */
+    border-radius: 15px;
+    background-color: rgba(10, 10, 10, 0.8);
     box-sizing: border-box;
 
     /* Добавляем две анимации: для свечения и для появления */
@@ -29,18 +30,18 @@ body {
 /* Анимация для неоновой подсветки */
 @keyframes neon-glow {
     0% {
-        box-shadow: 0 0 15px #00FFFF, 0 0 25px #00FFFF, 0 0 35px #00FFFF;
+        box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF; /* Уменьшаем свечение */
     }
     100% {
-        box-shadow: 0 0 15px #42a9ff, 0 0 25px #42a9ff, 0 0 35px #42a9ff;
+        box-shadow: 0 0 5px #42a9ff, 0 0 10px #42a9ff, 0 0 15px #42a9ff; /* Уменьшаем свечение */
     }
 }
 
-/* Новая анимация появления */
+/* Анимация появления */
 @keyframes fade-in {
     0% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
     }
     100% {
         opacity: 1;
@@ -50,26 +51,30 @@ body {
 
 /* Стили для текста внутри блока */
 .content h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
+    font-size: 2.5em;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
 .content p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: 1em;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin: 10px 0;
 }
 
 .contact-info a {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
+    border-bottom: 1px solid transparent;
 }
 
 .contact-info a:hover {
     color: #00FFFF;
-    text-decoration: underline;
+    border-bottom: 1px solid #00FFFF;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -84,6 +89,6 @@ body {
     }
 
     .content p {
-        font-size: 1em;
+        font-size: 0.9em;
     }
 }
