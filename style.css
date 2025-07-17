@@ -10,7 +10,7 @@ body {
     margin: 0;
     text-align: center;
     line-height: 1.5;
-    overflow: hidden; /* Скрываем прокрутку, если анимация выходит за края */
+    overflow: hidden;
 }
 
 /* Анимация фона */
@@ -39,9 +39,9 @@ body {
 }
 
 
-/* Стили для главного неонового блока */
+/* Стили для главного блока */
 .neon-box {
-    position: relative; /* Чтобы гирлянда позиционировалась относительно блока */
+    position: relative;
     width: 380px; 
     padding: 25px;
     border: 1px solid transparent;
@@ -50,21 +50,21 @@ body {
     box-sizing: border-box;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     animation: neon-glow 3s infinite alternate ease-in-out, fade-in 1.5s ease-out forwards;
-    z-index: 1; /* Чтобы был выше фона */
+    z-index: 1;
 }
 
 .neon-box:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #42a9ff;
+    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFA500;
 }
 
-/* Анимация для неоновой подсветки */
+/* Анимация для неоновой подсветки (желтый/оранжевый) */
 @keyframes neon-glow {
     0% {
-        box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF;
+        box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 15px #FFD700;
     }
     100% {
-        box-shadow: 0 0 5px #42a9ff, 0 0 10px #42a9ff, 0 0 15px #42a9ff;
+        box-shadow: 0 0 5px #FFA500, 0 0 10px #FFA500, 0 0 15px #FFA500;
     }
 }
 
@@ -80,13 +80,13 @@ body {
     }
 }
 
-/* Анимация пульсации для текста */
+/* Анимация пульсации для текста (светлый/желтый) */
 @keyframes text-pulse {
     0% {
         text-shadow: 0 0 2px #fff;
     }
     100% {
-        text-shadow: 0 0 5px #fff, 0 0 10px #00FFFF;
+        text-shadow: 0 0 5px #fff, 0 0 10px #FFD700;
     }
 }
 
@@ -116,56 +116,73 @@ body {
 }
 
 .contact-info a:hover {
-    color: #00FFFF;
-    border-bottom: 1px solid #00FFFF;
+    color: #FFD700;
+    border-bottom: 1px solid #FFD700;
 }
 
-
-/* Стили для гирлянды */
-.garland {
+/* НОВЫЕ СТИЛИ ДЛЯ ГИРЛЯНДЫ */
+.garland-wrap {
     position: absolute;
     top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 250px;
-    height: 10px;
-    border-top: 2px solid #333;
-    border-radius: 50%;
+    left: -25px; /* Корректируем, чтобы гирлянда обтягивала коробку */
+    width: calc(100% + 50px);
+    height: 100px;
+    z-index: 10;
 }
 
-.garland::before,
-.garland::after {
+.garland-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    stroke: #4A4A4A; /* Серый цвет нити */
+    stroke-width: 2px;
+    fill: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+.lights-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.garland-light {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle at 50% 50%, #FFD700 0%, #FFA500 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px 4px rgba(255, 165, 0, 0.7);
+    z-index: 20;
+    animation: flicker 2s infinite ease-in-out alternate;
+}
+
+/* Эффект свечения боков с переливом */
+.garland-light::before {
     content: '';
     position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #00FFFF;
-    box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF;
-    animation: garland-pulse 2s infinite alternate ease-in-out;
-}
-
-.garland::before {
+    top: 0;
     left: 0;
-    top: -5px;
-    animation-delay: 0.5s;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255, 165, 0, 0.7) 0%, rgba(255, 69, 0, 0) 50%, rgba(255, 0, 0, 0.7) 100%);
+    animation: sideGlow 4s infinite ease-in-out;
 }
 
-.garland::after {
-    right: 0;
-    top: -5px;
-    animation-delay: 1s;
+@keyframes flicker {
+    0% { transform: scale(1); box-shadow: 0 0 8px 4px rgba(255, 165, 0, 0.7); }
+    50% { transform: scale(1.1); box-shadow: 0 0 12px 6px rgba(255, 165, 0, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 8px 4px rgba(255, 165, 0, 0.7); }
 }
 
-@keyframes garland-pulse {
-    0% {
-        transform: scale(0.9);
-        box-shadow: 0 0 5px #00FFFF;
-    }
-    100% {
-        transform: scale(1.2);
-        box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
-    }
+@keyframes sideGlow {
+    0% { transform: rotate(0deg); opacity: 0.8; }
+    50% { transform: rotate(180deg); opacity: 1; }
+    100% { transform: rotate(360deg); opacity: 0.8; }
 }
 
 /* Адаптивность */
@@ -179,8 +196,5 @@ body {
     }
     .content p {
         font-size: 0.9em;
-    }
-    .garland {
-        width: 60%;
     }
 }
