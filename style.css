@@ -1,17 +1,25 @@
-/* Базовые настройки */
+/* Анимация плавного появления всего сайта из темноты */
 body {
     margin: 0;
     background-color: #000;
     color: #ccc;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Manrope', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     overflow: hidden;
+    opacity: 0;
+    animation: fade-in-body 1.5s ease forwards;
 }
 
-/* Красивый фон с мягким движением */
+@keyframes fade-in-body {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Красивый фон */
 .background {
     position: fixed;
     top: 0;
@@ -19,63 +27,89 @@ body {
     width: 200%;
     height: 200%;
     background:
-        radial-gradient(circle at 25% 30%, rgba(0, 100, 255, 0.1), transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(0, 120, 255, 0.15), transparent 50%),
+        radial-gradient(circle at 30% 30%, rgba(0, 100, 255, 0.12), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 120, 255, 0.1), transparent 50%),
         linear-gradient(120deg, #000, #0b0b0b, #000);
     animation: float-background 40s linear infinite;
     z-index: -1;
 }
 
 @keyframes float-background {
-    0% {
-        transform: translate(0, 0);
-    }
-    50% {
-        transform: translate(-80px, -40px);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(-80px, -40px); }
+    100% { transform: translate(0, 0); }
 }
 
-/* Центральный неоновый квадрат */
+/* Квадрат пропорциональный */
 .neon-card {
-    width: 360px;
+    width: 320px;
+    height: 320px;
     padding: 30px 25px;
     background-color: rgba(10, 10, 10, 0.95);
     border-radius: 16px;
-    border: 1px solid rgba(0, 150, 255, 0.4);
-    box-shadow:
-        0 0 6px rgba(0, 150, 255, 0.3),
-        0 0 14px rgba(0, 150, 255, 0.15);
-    transition: 0.4s;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    position: relative;
+    animation: fade-in-card 1.5s ease forwards;
 }
 
-.neon-card:hover {
-    box-shadow:
-        0 0 10px rgba(0, 150, 255, 0.5),
-        0 0 25px rgba(0, 150, 255, 0.2);
+/* Обводка неоновая переливающаяся */
+.neon-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, #007bff, #00cfff);
+    background-size: 300% 300%;
+    animation: gradient-shift 4s ease-in-out infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    z-index: -1;
 }
 
-/* Заголовок */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in-card {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Заголовок выделен чуть больше */
 h1 {
-    font-size: 2rem;
-    font-weight: 400;
+    font-size: 1.9rem;
+    font-weight: 600;
     color: #e0e0e0;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
 }
 
-/* Основной текст */
+/* Обычный текст */
 .neon-card p {
-    font-weight: 300;
-    font-size: 0.92rem;
+    font-weight: 400;
+    font-size: 0.88rem;
     color: #aaa;
-    margin-bottom: 14px;
-    line-height: 1.6;
+    margin-bottom: 10px;
+    line-height: 1.5;
 }
 
-/* Ссылки */
+/* Контакты */
 .contacts a {
     color: #7daaff;
     text-decoration: none;
