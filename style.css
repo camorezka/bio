@@ -2,7 +2,7 @@
 body {
     background-color: #000;
     color: #fff;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif; /* Измененный шрифт */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,8 +42,8 @@ body {
 /* Стили для главного блока */
 .neon-box {
     position: relative;
-    width: 90%; /* Сделали отзывчивым */
-    max-width: 380px; /* Ограничили максимальную ширину */
+    width: 90%;
+    max-width: 380px;
     padding: 25px;
     border: 1px solid transparent;
     border-radius: 15px;
@@ -90,13 +90,14 @@ body {
 .content h1 {
     font-size: 2.2em;
     margin-bottom: 15px;
-    font-weight: 700;
+    font-weight: 300; /* Измененный вес шрифта */
     animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
 .content p {
     font-size: 0.95em;
     margin-bottom: 15px;
+    font-weight: 300; /* Измененный вес шрифта */
     animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
@@ -119,10 +120,10 @@ body {
 /* НОВЫЕ СТИЛИ ДЛЯ ГИРЛЯНДЫ */
 .garland-wrap {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: -5px; /* Отступ от неонового квадрата */
+    left: -5px; /* Отступ от неонового квадрата */
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
     z-index: 10;
 }
 
@@ -136,31 +137,30 @@ body {
 
 .garland-light {
     position: absolute;
-    width: 15px;
-    height: 15px;
+    width: 8px; /* Уменьшен размер шарика */
+    height: 8px; /* Уменьшен размер шарика */
     background: #FFD700;
     border-radius: 50%;
-    box-shadow: 0 0 5px 2px rgba(255, 165, 0, 0.5);
+    box-shadow: 0 0 3px 1px rgba(255, 165, 0, 0.5);
     z-index: 20;
     opacity: 0;
     animation: sequential-pulse 3s infinite;
-    transform: translate(-50%, -50%); /* Позволяет центру шарика быть на границе */
 }
 
 /* АНИМАЦИЯ ПЕРЕЛИВА ЖЕЛТЫЙ -> ОРАНЖЕВЫЙ */
 @keyframes sequential-pulse {
     0%, 10% {
         opacity: 0.1;
-        box-shadow: 0 0 5px 2px rgba(255, 255, 0, 0.2);
+        box-shadow: 0 0 3px 1px rgba(255, 255, 0, 0.2);
     }
     20%, 80% {
         opacity: 1;
         background: #FFA500;
-        box-shadow: 0 0 10px 4px rgba(255, 165, 0, 0.8);
+        box-shadow: 0 0 6px 3px rgba(255, 165, 0, 0.8);
     }
     90%, 100% {
         opacity: 0.1;
         background: #FFD700;
-        box-shadow: 0 0 5px 2px rgba(255, 255, 0, 0.2);
+        box-shadow: 0 0 3px 1px rgba(255, 255, 0, 0.2);
     }
 }
