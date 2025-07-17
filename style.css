@@ -13,11 +13,15 @@ body {
 
 /* Стили для главного неонового блока */
 .neon-box {
-    width: 600px;
+    /* Уменьшаем ширину */
+    width: 500px; 
     padding: 40px;
     border: 3px solid transparent;
     border-radius: 20px;
-    box-shadow: 0 0 50px rgba(0, 255, 255, 0.7), 0 0 100px rgba(0, 255, 255, 0.5);
+    
+    /* Уменьшаем яркость и размах свечения */
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), 0 0 60px rgba(0, 255, 255, 0.3);
+    
     background-color: rgba(10, 10, 10, 0.7);
     animation: neon-glow 3s infinite alternate ease-in-out;
     box-sizing: border-box;
@@ -26,10 +30,12 @@ body {
 /* Анимация для неоновой подсветки */
 @keyframes neon-glow {
     0% {
-        box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF, 0 0 60px #00FFFF;
+        /* Уменьшаем яркость */
+        box-shadow: 0 0 15px #00FFFF, 0 0 25px #00FFFF, 0 0 35px #00FFFF;
     }
     100% {
-        box-shadow: 0 0 20px #42a9ff, 0 0 40px #42a9ff, 0 0 60px #42a9ff;
+        /* Уменьшаем яркость */
+        box-shadow: 0 0 15px #42a9ff, 0 0 25px #42a9ff, 0 0 35px #42a9ff;
     }
 }
 
