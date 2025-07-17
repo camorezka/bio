@@ -1,0 +1,74 @@
+/* Основные стили для страницы */
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+/* Стили для главного неонового блока */
+.neon-box {
+    width: 600px;
+    padding: 40px;
+    border: 3px solid transparent;
+    border-radius: 20px;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.7), 0 0 100px rgba(0, 255, 255, 0.5);
+    background-color: rgba(10, 10, 10, 0.7);
+    animation: neon-glow 3s infinite alternate ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Анимация для неоновой подсветки */
+@keyframes neon-glow {
+    0% {
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF, 0 0 60px #00FFFF;
+    }
+    100% {
+        box-shadow: 0 0 20px #42a9ff, 0 0 40px #42a9ff, 0 0 60px #42a9ff;
+    }
+}
+
+/* Стили для текста внутри блока */
+.content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.contact-info a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: #00FFFF;
+    text-decoration: underline;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .neon-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .content h1 {
+        font-size: 2em;
+    }
+
+    .content p {
+        font-size: 1em;
+    }
+}
