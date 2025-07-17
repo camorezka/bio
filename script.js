@@ -1,166 +1,59 @@
-/* Основные стили для страницы */
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'PT Sans', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    text-align: center;
-    line-height: 1.5;
-    overflow: hidden;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.lights-container');
+    const neonBox = document.querySelector('.neon-box');
+    const numLights = 30; // Количество шариков
 
-/* Анимация фона */
-.background-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: 
-        radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1.5px);
-    background-size: 150px 150px, 200px 200px;
-    background-position: 0 0, 75px 75px;
-    animation: background-move 120s linear infinite;
-}
-
-@keyframes background-move {
-    from {
-        background-position: 0 0, 75px 75px;
+    if (!container || !neonBox) {
+        console.error('Не найдены элементы lights-container или neon-box.');
+        return;
     }
-    to {
-        background-position: 150px 150px, 275px 225px;
-    }
-}
 
+    // Используем ResizeObserver для отслеживания изменения размера блока
+    const resizeObserver = new ResizeObserver(entries => {
+        const entry = entries[0];
+        const boxWidth = entry.contentRect.width;
+        const boxHeight = entry.contentRect.height;
+        const totalPerimeter = (boxWidth * 2) + (boxHeight * 2);
 
-/* Стили для главного блока */
-.neon-box {
-    position: relative;
-    width: 90%; /* Сделали отзывчивым */
-    max-width: 380px; /* Ограничили максимальную ширину */
-    padding: 25px;
-    border: 1px solid transparent;
-    border-radius: 15px;
-    background-color: rgba(10, 10, 10, 0.8);
-    box-sizing: border-box;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    animation: neon-glow 3s infinite alternate ease-in-out, fade-in 1.5s ease-out forwards;
-    z-index: 1;
-}
+        // Очищаем предыдущие шарики, если они были
+        container.innerHTML = '';
 
-/* ТОНКИЙ НЕОН С ПЕРЕЛИВОМ КРАСНЫЙ -> ОРАНЖЕВЫЙ */
-@keyframes neon-glow {
-    0% {
-        box-shadow: 0 0 2px 1px #FF0000, 0 0 4px 2px #FF0000;
-    }
-    100% {
-        box-shadow: 0 0 2px 1px #FFA500, 0 0 4px 2px #FFA500;
-    }
-}
+        for (let i = 0; i < numLights; i++) {
+            const light = document.createElement('div');
+            light.classList.add('garland-light');
 
-/* Анимация появления */
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+            const progress = i / numLights;
+            let top, left;
 
-/* Анимация пульсации для текста */
-@keyframes text-pulse {
-    0% {
-        text-shadow: 0 0 2px #fff;
-    }
-    100% {
-        text-shadow: 0 0 5px #fff, 0 0 10px #FFD700;
-    }
-}
+            // Расчет позиций по периметру
+            if (progress < (boxWidth / totalPerimeter)) {
+                // Верхняя сторона
+                left = progress * totalPerimeter;
+                top = 0;
+            } else if (progress < (boxWidth + boxHeight) / totalPerimeter) {
+                // Правая сторона
+                left = boxWidth;
+                top = (progress * totalPerimeter) - boxWidth;
+            } else if (progress < (boxWidth * 2 + boxHeight) / totalPerimeter) {
+                // Нижняя сторона
+                left = (boxWidth * 2 + boxHeight) - (progress * totalPerimeter);
+                top = boxHeight;
+            } else {
+                // Левая сторона
+                left = 0;
+                top = (boxWidth * 2 + boxHeight * 2) - (progress * totalPerimeter);
+            }
 
-/* Стили для текста внутри блока */
-.content h1 {
-    font-size: 2.2em;
-    margin-bottom: 15px;
-    font-weight: 700;
-    animation: text-pulse 3s infinite alternate ease-in-out;
-}
+            light.style.left = `${left}px`;
+            light.style.top = `${top}px`;
 
-.content p {
-    font-size: 0.95em;
-    margin-bottom: 15px;
-    animation: text-pulse 3s infinite alternate ease-in-out;
-}
+            // Устанавливаем задержку для "бегущего огонька"
+            light.style.animationDelay = `${i * (3 / numLights)}s`;
+            
+            container.appendChild(light);
+        }
+    });
 
-.contact-info p {
-    margin: 8px 0;
-}
-
-.contact-info a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    border-bottom: 1px solid transparent;
-}
-
-.contact-info a:hover {
-    color: #FFD700;
-    border-bottom: 1px solid #FFD700;
-}
-
-/* НОВЫЕ СТИЛИ ДЛЯ ГИРЛЯНДЫ */
-.garland-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
-
-.lights-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.garland-light {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: #FFD700;
-    border-radius: 50%;
-    box-shadow: 0 0 5px 2px rgba(255, 165, 0, 0.5);
-    z-index: 20;
-    opacity: 0;
-    animation: sequential-pulse 3s infinite;
-    transform: translate(-50%, -50%); /* Позволяет центру шарика быть на границе */
-}
-
-/* АНИМАЦИЯ ПЕРЕЛИВА ЖЕЛТЫЙ -> ОРАНЖЕВЫЙ */
-@keyframes sequential-pulse {
-    0%, 10% {
-        opacity: 0.1;
-        box-shadow: 0 0 5px 2px rgba(255, 255, 0, 0.2);
-    }
-    20%, 80% {
-        opacity: 1;
-        background: #FFA500;
-        box-shadow: 0 0 10px 4px rgba(255, 165, 0, 0.8);
-    }
-    90%, 100% {
-        opacity: 0.1;
-        background: #FFD700;
-        box-shadow: 0 0 5px 2px rgba(255, 255, 0, 0.2);
-    }
-}
+    // Наблюдаем за изменением размеров neon-box
+    resizeObserver.observe(neonBox);
+});
