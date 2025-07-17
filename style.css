@@ -2,7 +2,7 @@
 body {
     background-color: #000;
     color: #fff;
-    font-family: 'Montserrat', sans-serif; /* Измененный шрифт */
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@ body {
     margin: 0;
     text-align: center;
     line-height: 1.5;
-    overflow: hidden;
+    overflow: hidden; /* Запрещает прокрутку страницы */
 }
 
 /* Анимация фона */
@@ -41,7 +41,10 @@ body {
 
 /* Стили для главного блока */
 .neon-box {
-    position: relative;
+    position: fixed; /* Закрепляет блок на месте */
+    top: 50%; /* Центрирует по вертикали */
+    left: 50%; /* Центрирует по горизонтали */
+    transform: translate(-50%, -50%); /* Точная центровка */
     width: 90%;
     max-width: 380px;
     padding: 25px;
@@ -90,14 +93,14 @@ body {
 .content h1 {
     font-size: 2.2em;
     margin-bottom: 15px;
-    font-weight: 300; /* Измененный вес шрифта */
+    font-weight: 300;
     animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
 .content p {
     font-size: 0.95em;
     margin-bottom: 15px;
-    font-weight: 300; /* Измененный вес шрифта */
+    font-weight: 300;
     animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
@@ -120,8 +123,8 @@ body {
 /* НОВЫЕ СТИЛИ ДЛЯ ГИРЛЯНДЫ */
 .garland-wrap {
     position: absolute;
-    top: -5px; /* Отступ от неонового квадрата */
-    left: -5px; /* Отступ от неонового квадрата */
+    top: -5px;
+    left: -5px;
     width: calc(100% + 10px);
     height: calc(100% + 10px);
     z-index: 10;
@@ -137,8 +140,8 @@ body {
 
 .garland-light {
     position: absolute;
-    width: 8px; /* Уменьшен размер шарика */
-    height: 8px; /* Уменьшен размер шарика */
+    width: 8px;
+    height: 8px;
     background: #FFD700;
     border-radius: 50%;
     box-shadow: 0 0 3px 1px rgba(255, 165, 0, 0.5);
