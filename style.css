@@ -1,9 +1,7 @@
 /* Основные стили для страницы */
 body {
-    /* Добавляем легкий градиентный фон */
     background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
     color: #fff;
-    /* Изменяем шрифт на PT Sans */
     font-family: 'PT Sans', sans-serif;
     display: flex;
     justify-content: center;
@@ -11,29 +9,33 @@ body {
     min-height: 100vh;
     margin: 0;
     text-align: center;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* Стили для главного неонового блока */
 .neon-box {
-    width: 420px; 
-    padding: 30px;
-    border: 1px solid transparent; /* Уменьшаем толщину границы */
+    width: 380px; 
+    padding: 25px;
+    border: 1px solid transparent;
     border-radius: 15px;
     background-color: rgba(10, 10, 10, 0.8);
     box-sizing: border-box;
-
-    /* Добавляем две анимации: для свечения и для появления */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     animation: neon-glow 3s infinite alternate ease-in-out, fade-in 1.5s ease-out forwards;
+}
+
+.neon-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #42a9ff;
 }
 
 /* Анимация для неоновой подсветки */
 @keyframes neon-glow {
     0% {
-        box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF; /* Уменьшаем свечение */
+        box-shadow: 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 15px #00FFFF;
     }
     100% {
-        box-shadow: 0 0 5px #42a9ff, 0 0 10px #42a9ff, 0 0 15px #42a9ff; /* Уменьшаем свечение */
+        box-shadow: 0 0 5px #42a9ff, 0 0 10px #42a9ff, 0 0 15px #42a9ff;
     }
 }
 
@@ -49,20 +51,32 @@ body {
     }
 }
 
+/* Анимация пульсации для текста */
+@keyframes text-pulse {
+    0% {
+        text-shadow: 0 0 2px #fff;
+    }
+    100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #00FFFF;
+    }
+}
+
 /* Стили для текста внутри блока */
 .content h1 {
-    font-size: 2.5em;
+    font-size: 2.2em;
     margin-bottom: 15px;
     font-weight: 700;
+    animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
 .content p {
-    font-size: 1em;
+    font-size: 0.95em;
     margin-bottom: 15px;
+    animation: text-pulse 3s infinite alternate ease-in-out;
 }
 
 .contact-info p {
-    margin: 10px 0;
+    margin: 8px 0;
 }
 
 .contact-info a {
@@ -85,7 +99,7 @@ body {
     }
 
     .content h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
 
     .content p {
