@@ -82,6 +82,15 @@ h1 {
     line-height: 1.5;
 }
 
+.sub-title {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 20px;
+    text-transform: lowercase;
+    letter-spacing: 0.8px;
+}
+
+
 /* Ссылки */
 .contacts a {
     color: #ffaa55;
