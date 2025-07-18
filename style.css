@@ -132,6 +132,20 @@ html, body {
     }
 }
 
+.contacts-link {
+    color: #ffaa55;
+    text-decoration: none;
+    border-bottom: 1px dotted transparent;
+    transition: 0.3s;
+    font-size: 0.92rem; /* как у контактов */
+}
+
+.contacts-link:hover {
+    color: #fff;
+    border-color: #ffaa55;
+}
+
+
 /* НЕОН: бегущий контур красный → оранжевый */
 .neon-card::before {
     content: '';
