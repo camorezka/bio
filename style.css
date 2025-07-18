@@ -7,16 +7,23 @@
 
 html, body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
     background-color: #0a0a0a;
     color: #ddd;
+    overflow-y: auto; /* чтобы был скролл по вертикали */
     display: flex;
     justify-content: center;
+    /* убираем align-items: center, чтобы не фиксировать вертикально */
+    /* сделаем выравнивание по центру по горизонтали */
+    flex-direction: column;
     align-items: center;
-    flex-direction: column; /* Чтобы блоки шли вертикально */
+    padding: 40px 0; /* отступ сверху и снизу */
+    box-sizing: border-box;
 }
+
 
 /* Атмосферный фон + шум */
 .background {
