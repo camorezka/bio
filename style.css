@@ -64,14 +64,7 @@ html, body {
     100% { background-position: 0% 50%; }
 }
 
-/* Заголовок */
-h1 {
-    font-size: 2.3rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #ffaa00;
-    text-shadow: 0 0 8px #ff5500;
-}
+
 
 /* Обычный текст */
 .content p {
@@ -82,13 +75,25 @@ h1 {
     line-height: 1.5;
 }
 
-.sub-title {
-    font-size: 0.75rem;
-    color: #666;
-    margin-bottom: 20px;
-    text-transform: lowercase;
-    letter-spacing: 0.8px;
+h1 {
+    font-size: 2.3rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: #ffaa00;
+    text-shadow: 0 0 8px #ff5500;
+    line-height: 1.1;
 }
+
+.sub-title {
+    font-size: 0.7rem;
+    color: #666;
+    margin-bottom: 12px;
+    opacity: 0.8;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: lowercase;
+}
+
 
 
 /* Ссылки */
