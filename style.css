@@ -15,6 +15,7 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column; /* Чтобы блоки шли вертикально */
 }
 
 /* Атмосферный фон + шум */
@@ -61,12 +62,11 @@ html, body {
     pointer-events: none;
 }
 
-
-/* Карточка */
-.neon-card {
+/* Карточки: одинаковая ширина, по центру, вертикальный поток */
+.neon-card, .donate-card {
     width: 400px;
     max-width: 90%;
-    padding: 30px;
+    margin: 10px auto 0;
     background-color: rgba(15, 15, 15, 0.9);
     border-radius: 18px;
     position: relative;
@@ -76,10 +76,43 @@ html, body {
     animation: breathing 6s ease-in-out infinite, card-light-on 2s ease-out forwards;
 }
 
+/* Уменьшаем высоту доната за счет padding и скругления */
+.donate-card {
+    padding: 15px 30px;
+    border-radius: 14px;
+    margin-top: 15px;
+}
+
+/* Паддинг для основного блока */
+.neon-card {
+    padding: 30px;
+}
+
+/* Анимация "дыхания" */
 @keyframes breathing {
     0% { transform: scale(1); }
     50% { transform: scale(1.01); }
     100% { transform: scale(1); }
+}
+
+/* Анимация появления */
+@keyframes card-light-on {
+    0% {
+        opacity: 0;
+        filter: brightness(0.2);
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1.2);
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+        transform: scale(1);
+    }
 }
 
 /* НЕОН: бегущий контур красный → оранжевый */
@@ -99,13 +132,29 @@ html, body {
     z-index: -1;
 }
 
+.donate-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, #ff0000, #ff5500, #ffaa00, #ff5500, #ff0000);
+    background-size: 400% 400%;
+    animation: neon-border 6s linear infinite;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    z-index: -1;
+}
+
 @keyframes neon-border {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Текст */
+/* Текст внутри карточек */
 .content p {
     font-size: 0.92rem;
     font-weight: 400;
@@ -140,102 +189,36 @@ h1 {
     text-transform: lowercase;
 }
 
-/* Ссылки */
+/* Ссылки контактов */
 .contacts a {
     color: #ffaa55;
     text-decoration: none;
     border-bottom: 1px dotted transparent;
     transition: 0.3s;
 }
+
 .contacts a:hover {
     color: #fff;
     border-color: #ffaa55;
 }
 
-/* Плавное появление */
-@keyframes card-light-on {
-    0% {
-        opacity: 0;
-        filter: brightness(0.2);
-        transform: scale(0.95);
-    }
-    50% {
-        opacity: 1;
-        filter: brightness(1.2);
-        transform: scale(1.02);
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-    }
-    100% {
-        opacity: 1;
-        filter: brightness(1);
-        transform: scale(1);
-    }
-}
-
-.donate-card {
-    width: 300px;
-    max-width: 90%;
-    padding: 20px;
-    margin-top: 20px;
-    background-color: rgba(15, 15, 15, 0.9);
-    border-radius: 14px;
-    position: relative;
-    text-align: center;
-    z-index: 1;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    animation: breathing 6s ease-in-out infinite, card-light-on 2s ease-out forwards;
-}
-
-.donate-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    padding: 1.5px;
-    border-radius: 14px;
-    background: linear-gradient(45deg, #ff0000, #ff5500, #ffaa00, #ff5500, #ff0000);
-    background-size: 400% 400%;
-    animation: neon-border 6s linear infinite;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: destination-out;
-    z-index: -1;
-}
-
-.donate-card .content h2 {
-    font-size: 1.3rem;
-    color: #ffaa00;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px #ff5500;
-}
-
-.donate-card .content p {
-    font-size: 0.85rem;
-    color: #aaa;
-    margin-bottom: 15px;
-    line-height: 1.4;
-}
-
-.neon-button {
-    display: inline-block;
+/* Ссылка в донате — как текст */
+.donate-link-text {
     color: #ffaa55;
-    padding: 10px 20px;
-    border: 1px solid transparent;
-    border-radius: 8px;
     text-decoration: none;
-    background-color: rgba(30, 30, 30, 0.8);
-    box-shadow: 0 0 5px #ff5500;
-    transition: 0.3s;
-    animation: pulse 3s infinite;
+    border-bottom: 1px dotted transparent;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.3s, border-color 0.3s;
+    font-size: 1rem;
 }
 
-.neon-button:hover {
-    background-color: rgba(50, 50, 50, 0.8);
+.donate-link-text:hover {
     color: #fff;
-    box-shadow: 0 0 15px #ff5500;
+    border-color: #ffaa55;
 }
 
+/* Подвал */
 .footer {
     position: fixed;
     bottom: 10px;
@@ -245,4 +228,3 @@ h1 {
     color: #555;
     z-index: 1;
 }
-
