@@ -6,19 +6,6 @@ canvas.height = window.innerHeight;
 const particlesArray = [];
 const numberOfParticles = 100;
 
-
-function Particle() {
-  this.x = Math.random() * canvas.width;
-  this.y = Math.random() * canvas.height;
-  this.size = Math.random() * 2 + 1.5; // было 0.5 - 1.5, стало больше и светлее
-  this.speedX = (Math.random() - 0.5) * 0.1;  // чуть быстрее движение
-  this.speedY = (Math.random() - 0.5) * 0.1;
-  this.alpha = Math.random() * 0.3 + 0.2;    // светлее (0.2-0.5)
-  this.color = `rgba(255,255,255,${this.alpha})`;
-}
-
-
-
 for (let i = 0; i < numberOfParticles; i++) {
     particlesArray.push({
         x: Math.random() * canvas.width,
