@@ -25,9 +25,9 @@ html, body {
 }
 
 .donate-card .content h2 {
-    font-size: 2.3rem;          /* как у h1 */
+    font-size: 2rem;          /* как у h1 */
     font-weight: 600;
-    margin-bottom: 2px;          /* как у h1 */
+    margin-bottom: 5px;          /* как у h1 */
     color: #ffaa00;
     text-shadow: 0 0 8px #ff5500;
     line-height: 1.1;
