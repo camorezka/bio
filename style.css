@@ -64,6 +64,11 @@ html, body {
     100% { background-position: 0% 50%; }
 }
 
+.neon-card:hover {
+    background-color: rgba(25, 10, 0, 0.95);
+    box-shadow: 0 0 40px rgba(255, 85, 0, 0.7);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
 
 
 /* Обычный текст */
@@ -94,6 +99,17 @@ h1 {
     text-transform: lowercase;
 }
 
+.contacts a {
+    display: inline-block;
+    transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
+}
+
+.contacts a:hover {
+    color: #fff;
+    border-color: #ffaa55;
+    text-shadow: 0 0 8px #ffaa55;
+    transform: scale(1.05);
+}
 
 
 /* Ссылки */
