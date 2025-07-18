@@ -8,35 +8,25 @@
 html, body {
     width: 100%;
     height: 100%;
-    overflow: auto;    /* Чтобы не обрезать содержимое */
+    overflow: hidden;
     font-family: 'Poppins', sans-serif;
     background-color: #0a0a0a;
     color: #ddd;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;    /* Немного внутреннего отступа для маленьких экранов */
 }
 
+/* Атмосферный фон + шум */
 .background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 30% 30%, rgba(255, 0, 0, 0.05), transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(255, 100, 0, 0.05), transparent 50%),
-    linear-gradient(120deg, #0a0a0a, #000);
-  animation: backgroundShift 30s linear infinite;
-  z-index: -1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 0, 0, 0.05), transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255, 100, 0, 0.05), transparent 50%),
+                linear-gradient(120deg, #0a0a0a, #000);
+    z-index: -1;
 }
-
-@keyframes backgroundShift {
-  0% { background-position: 30% 30%, 70% 70%, 0% 0%; }
-  50% { background-position: 35% 35%, 75% 75%, 10% 10%; }
-  100% { background-position: 30% 30%, 70% 70%, 0% 0%; }
-}
-
-
 .background::before {
     content: "";
     position: absolute;
@@ -49,46 +39,32 @@ html, body {
     pointer-events: none;
     z-index: -1;
 }
-
-
-
 .background::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: url('https://i.ibb.co/yYyyzHb/dust.png');
-    background-size: cover;
-    opacity: 0.3;
-    animation: dustMove 60s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes dustMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(100px, 200px); }
-}
-
-
-@keyframes pulseGlow {
-  0% { opacity: 0.15; transform: scale(1); }
-  100% { opacity: 0.4; transform: scale(1.2); }
-}
-
-
-
-#particles {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
-    z-index: 0;
     pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.6));
+    z-index: 0;
 }
 
+/* Канвас с частицами */
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+/* Карточка */
 .neon-card {
-    width: 90vw;          /* Занимает 90% ширины окна */
-    max-width: 400px;     /* Максимальная ширина 400px */
+    width: 400px;
+    max-width: 90%;
     padding: 30px;
     background-color: rgba(15, 15, 15, 0.9);
     border-radius: 18px;
@@ -96,35 +72,8 @@ html, body {
     text-align: center;
     z-index: 1;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    
-    /* Центрируем по вертикали и горизонтали */
-    margin: auto;
+    animation: breathing 6s ease-in-out infinite, card-light-on 2s ease-out forwards;
 }
-
-@keyframes card-light-on {
-    0% {
-        opacity: 0;
-        filter: brightness(0.1);
-        transform: scale(0.95);
-        box-shadow: none;
-    }
-    30% {
-        opacity: 1;
-        filter: brightness(2);
-        transform: scale(1.02);
-        box-shadow: 0 0 60px rgba(255, 100, 0, 0.6);
-    }
-    70% {
-        filter: brightness(1.5);
-        box-shadow: 0 0 40px rgba(255, 80, 0, 0.4);
-    }
-    100% {
-        filter: brightness(1);
-        transform: scale(1);
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-    }
-}
-
 
 @keyframes breathing {
     0% { transform: scale(1); }
@@ -132,21 +81,22 @@ html, body {
     100% { transform: scale(1); }
 }
 
+/* НЕОН: бегущий контур красный → оранжевый */
 .neon-card::before {
     content: '';
     position: absolute;
     inset: 0;
     padding: 2px;
-    border-radius: inherit;
+    border-radius: 18px;
     background: linear-gradient(45deg, #ff0000, #ff5500, #ffaa00, #ff5500, #ff0000);
     background-size: 400% 400%;
     animation: neon-border 6s linear infinite;
-    pointer-events: none;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
     z-index: -1;
-    filter: blur(2px); /* Сделает неон более плавным без артефактов */
 }
-
-
 
 @keyframes neon-border {
     0% { background-position: 0% 50%; }
