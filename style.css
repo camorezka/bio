@@ -51,19 +51,23 @@ html, body {
 }
 
 
+
 .background::after {
-  content: '';
-  position: fixed;
-  top: 20%;
-  left: 15%;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
-  filter: blur(40px);
-  animation: pulseGlow 5s infinite alternate;
-  pointer-events: none;
-  z-index: 0;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://i.ibb.co/yYyyzHb/dust.png');
+    background-size: cover;
+    opacity: 0.3;
+    animation: dustMove 60s linear infinite;
+    pointer-events: none;
 }
+
+@keyframes dustMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(100px, 200px); }
+}
+
 
 @keyframes pulseGlow {
   0% { opacity: 0.15; transform: scale(1); }
@@ -97,6 +101,29 @@ html, body {
     margin: auto;
 }
 
+@keyframes card-light-on {
+    0% {
+        opacity: 0;
+        filter: brightness(0.1);
+        transform: scale(0.95);
+        box-shadow: none;
+    }
+    30% {
+        opacity: 1;
+        filter: brightness(2);
+        transform: scale(1.02);
+        box-shadow: 0 0 60px rgba(255, 100, 0, 0.6);
+    }
+    70% {
+        filter: brightness(1.5);
+        box-shadow: 0 0 40px rgba(255, 80, 0, 0.4);
+    }
+    100% {
+        filter: brightness(1);
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+}
 
 
 @keyframes breathing {
@@ -105,22 +132,21 @@ html, body {
     100% { transform: scale(1); }
 }
 
-/* НЕОН: бегущий контур красный → оранжевый */
 .neon-card::before {
     content: '';
     position: absolute;
     inset: 0;
     padding: 2px;
-    border-radius: 18px;
+    border-radius: inherit;
     background: linear-gradient(45deg, #ff0000, #ff5500, #ffaa00, #ff5500, #ff0000);
     background-size: 400% 400%;
     animation: neon-border 6s linear infinite;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: destination-out;
+    pointer-events: none;
     z-index: -1;
+    filter: blur(2px); /* Сделает неон более плавным без артефактов */
 }
+
+
 
 @keyframes neon-border {
     0% { background-position: 0% 50%; }
