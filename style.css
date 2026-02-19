@@ -1,4 +1,3 @@
-/* Базовая структура */
 * {
     margin: 0;
     padding: 0;
@@ -13,21 +12,20 @@ html, body {
     font-family: 'Poppins', sans-serif;
     background-color: #0a0a0a;
     color: #ddd;
-    overflow-y: auto; /* чтобы был скролл по вертикали */
+    overflow-y: auto;
     display: flex;
     justify-content: center;
-    /* убираем align-items: center, чтобы не фиксировать вертикально */
-    /* сделаем выравнивание по центру по горизонтали */
+
     flex-direction: column;
     align-items: center;
-    padding: 40px 0; /* отступ сверху и снизу */
+    padding: 40px 0;
     box-sizing: border-box;
 }
 
 .donate-card .content h2 {
-    font-size: 2rem;          /* как у h1 */
+    font-size: 2rem;         
     font-weight: 600;
-    margin-bottom: 5px;          /* как у h1 */
+    margin-bottom: 5px;         
     color: #ffaa00;
     text-shadow: 0 0 8px #ff5500;
     line-height: 1.1;
@@ -35,7 +33,6 @@ html, body {
 }
 
 
-/* Атмосферный фон + шум */
 .background {
     position: fixed;
     width: 100%;
@@ -79,7 +76,6 @@ html, body {
     pointer-events: none;
 }
 
-/* Карточки: одинаковая ширина, по центру, вертикальный поток */
 .neon-card, .donate-card {
     width: 400px;
     max-width: 90%;
@@ -93,26 +89,22 @@ html, body {
     animation: breathing 6s ease-in-out infinite, card-light-on 2s ease-out forwards;
 }
 
-/* Уменьшаем высоту доната за счет padding и скругления */
 .donate-card {
     padding: 15px 30px;
     border-radius: 14px;
     margin-top: 15px;
 }
 
-/* Паддинг для основного блока */
 .neon-card {
     padding: 30px;
 }
 
-/* Анимация "дыхания" */
 @keyframes breathing {
     0% { transform: scale(1); }
     50% { transform: scale(1.01); }
     100% { transform: scale(1); }
 }
 
-/* Анимация появления */
 @keyframes card-light-on {
     0% {
         opacity: 0;
@@ -137,7 +129,7 @@ html, body {
     text-decoration: none;
     border-bottom: 1px dotted transparent;
     transition: 0.3s;
-    font-size: 0.92rem; /* как у контактов */
+    font-size: 0.92rem; 
 }
 
 .contacts-link:hover {
@@ -146,7 +138,6 @@ html, body {
 }
 
 
-/* НЕОН: бегущий контур красный → оранжевый */
 .neon-card::before {
     content: '';
     position: absolute;
@@ -185,7 +176,6 @@ html, body {
     100% { background-position: 0% 50%; }
 }
 
-/* Текст внутри карточек */
 .content p {
     font-size: 0.92rem;
     font-weight: 400;
@@ -220,7 +210,6 @@ h1 {
     text-transform: lowercase;
 }
 
-/* Ссылки контактов */
 .contacts a {
     color: #ffaa55;
     text-decoration: none;
@@ -233,7 +222,6 @@ h1 {
     border-color: #ffaa55;
 }
 
-/* Ссылка в донате — как текст */
 .donate-link-text {
     color: #ffaa55;
     text-decoration: none;
@@ -249,7 +237,6 @@ h1 {
     border-color: #ffaa55;
 }
 
-/* Подвал */
 .footer {
     position: fixed;
     bottom: 10px;
